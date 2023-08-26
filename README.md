@@ -1,4 +1,4 @@
-[![NPM](https://nodei.co/npm/@trrxitte/xtcashnetwork-ha.png?downloads=true&stars=true)](https://nodei.co/npm/@trrxitte/xtcashnetwork-ha/)
+[![NPM](https://nodei.co/npm/@trrxitte/xtcashnetwork-ha.png?downloads=true&stars=true)](https://nodei.co/npm/@trrxitte/xtenetwork-ha/)
 
 [![Build Status](https://travis-ci.org/brandonlehmann/turtlecoind-ha.png?branch=master)](https://travis-ci.org/brandonlehmann/turtlecoind-ha) [![Build Status](https://ci.appveyor.com/api/projects/status/github/brandonlehmann/turtlecoind-ha?branch=master&svg=true)](https://ci.appveyor.com/project/brandonlehmann/turtlecoind-ha/branch/master)
 
@@ -22,46 +22,47 @@ The sample **service.js** includes how to automatically restart the daemon if it
 
 ## Dependencies
 
-* [NodeJS v8.x](https://nodejs.org/)
-* [XTCASHnetwork](https://github.com/trrxitte/traaittcash/releases) v1.4.4 
+* [NodeJS v8.x](https://nodejs.org/) 
+* [XTEetwork](https://github.com/trrxitte/xtenetwork-ha/releases) v1.4.4 
 
 ## Easy Start
 
-You *must* copy ```XTCASHnetwork``` into the ```XTCASHnetwork-ha``` folder for the easy start process to occur.
+You *must* copy ```XTEnetwork``` into the ```XTEnetwork-ha``` folder for the easy start process to occur.
 
 ```bash
-git clone https://github.com/TRRXITTE/XTCASHnetwork-ha.git
-cd XTCASHnetwork-ha
-cp <XTCASHnetwork> .
-npm install 
-node service.js
+Install nvm:
+sudo apt install curl
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+--> add setup variables
+
+nvm install 11
+nvm use 11
+npm install forever -g
 ```
+```
+git clone https://github.com/TRRXITTE/XTEnetwork-ha
+cd XTEnetwork-ha
+npm install
+
+wget https://github.com/TRRXITTE/XTEnetwork-ha/releases/download/0.10.44-XTEnetwork/XTEnetwork
+chmod +x XTEnetwork
+
+forever start service.js // node service.js
+```
+
+
+
 
 **It is highly recommended that you use [checkpoints](https://documentation.trrxitte.com/guides/wallets/Using-Checkpoints/) when starting fresh or you'll need to wait a while for the sync to occur.**
 
-## Keep it Running
-
-I'm a big fan of PM2 so if you don't have it installed, the setup is quite simple.
-
-```bash
-npm install -g pm2
-
-pm2 startup
-pm2 install pm2-logrotate
-
-pm2 start service.js --name xtcashnetwork
-pm2 save
-```
-
-## Documentation
 
 ### Initialization
 
-Practically all XTCASHnetwork command line arguments are exposed in the constructor method. Simply include them in your list of options to get activate or use them. Default values are defined below.
+Practically all XTEnetwork command line arguments are exposed in the constructor method. Simply include them in your list of options to get activate or use them. Default values are defined below.
 
 ```javascript
-var daemon = new XTCASHnetwork({
-  // These are our XTCASHnetwork-ha options
+var daemon = new XTEnetwork({
+  // These are our XTEnetwork-ha options
   pollingInterval: 10000, // How often to check the daemon in milliseconds
   maxPollingFailures: 3, // How many polling intervals can fail before we emit a down event?
   checkHeight: true, // Check the daemon block height against known trusted nodes
@@ -72,9 +73,9 @@ var daemon = new XTCASHnetwork({
   enableWebSocket: true, // Enables a socket.io websocket server on the rpcBindPort + 1
   webSocketPassword: false, // Set this to a password to use for the privileged socket events.
 
-  // These are the standard TurtleCoind options
-  path: './XTCASHnetwork', // Where can I find TurtleCoind?
-  dataDir: '~/.traaittCASH', // Where do you store your blockchain?
+  // These are the standard options
+  path: './XTEnetwork', // Where can I find TurtleCoind?
+  dataDir: '~/.traaitt', // Where do you store your blockchain?
   testnet: false, // Use the testnet?
   enableCors: false, // Enable CORS support for the domain in this value
   enableBlockExplorer: true, // Enable the block explorer
